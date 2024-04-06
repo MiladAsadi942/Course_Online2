@@ -1,0 +1,101 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+
+{% block background %}
+
+<div class="page-info-section set-bg" data-setbg="{% static 'website/website/img/page-bg/4.jpg' %}">
+	<div class="container">
+		<div class="site-breadcrumb">
+			<a href="{% url 'web:website' %}">Home</a>
+			<span>Contact</span>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+{% block main %}
+	<!-- Page info -->
+	
+	<!-- Page info end -->
+
+
+	<!-- search section -->
+	
+
+
+
+	<!-- Page -->
+	<section class="contact-page spad pb-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="contact-form-warp">
+						<div class="section-title text-white text-left">
+							<h2>Get in Touch</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. </p>
+						</div>
+						<form action="" method="POST" class="contact-form">
+							{{form.Name}}
+							{{form.Email}}
+							{{form.Sunjects}}
+							{{form.Message}}
+							
+							<button type="submit" class="site-btn">Sent Message</button>
+							{% csrf_token %}
+						</form>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="contact-info-area">
+						<div class="section-title text-left p-0">
+							<h2>Contact Info</h2>
+							<p>{{about.bio}}</p>
+						</div>
+						<div class="phone-number">
+							<span>Direct Line</span>
+							<h2>+93 {{about.phone}}</h2>
+						</div>
+						<ul class="contact-list">
+							<li>{{about.address}}</li>
+							<li>{{about.phone}}</li>
+							<li>{{about.email}}@gmail.com</li>
+						</ul>
+						<div class="social-links">
+							<a href="#"><i class="fa fa-pinterest"></i></a>
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
+							<a href="#"><i class="fa fa-linkedin"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div id="map-canvas"></div> -->
+		</div>
+	</section>
+	<!-- Page end -->
+
+
+	<!-- banner section -->
+	<!-- <section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Join Our Community Now!</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="#" class="site-btn">Register Now</a>
+			</div>
+		</div>
+	</section> -->
+	<!-- banner section end -->
+{% endblock %}
+
+	<!-- footer section -->
+	
+	<!-- footer section end -->
+
+
+	

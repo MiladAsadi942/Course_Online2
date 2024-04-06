@@ -1,0 +1,510 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block style %}
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.comment-section{
+    list-style: none;
+    max-width: 800px;
+    width: 100%;
+    margin: 50px auto;
+    padding: 10px;
+}
+
+.comment{
+    display: flex;
+    border-radius: 3px;
+    margin-bottom: 45px;
+    flex-wrap: wrap;
+}
+
+.comment.user-comment{
+    color:  #808080;
+}
+
+.comment.author-comment{
+    color:  #60686d;
+    justify-content: flex-end;
+}
+
+/* User and time info */
+
+.comment .info{
+    width: 17%;
+}
+
+.comment.user-comment .info{
+    text-align: right;
+}
+
+.comment.author-comment .info{
+    order: 3;
+}
+
+
+.comment .info a{	/* User name */
+    display: block;
+    text-decoration: none;
+    color: #656c71;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0 3px 0;
+}
+
+.comment .info span{	/* Time */
+    font-size: 11px;
+    color:  #9ca7af;
+}
+
+
+/* The user avatar */
+
+.comment .avatar{
+    width: 8%;
+}
+
+.comment.user-comment .avatar{
+    padding: 10px 18px 0 3px;
+}
+
+.comment.author-comment .avatar{
+    order: 2;
+    padding: 10px 3px 0 18px;
+}
+
+.comment .avatar img{
+    display: block;
+    border-radius: 50%;
+}
+
+.comment.user-comment .avatar img{
+    float: right;
+}
+
+
+
+
+
+/* The comment text */
+
+.comment p{
+    line-height: 1.5;
+    padding: 18px 22px;
+    width: 50%;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.comment.user-comment p{
+    background-color:  #f3f3f3;
+}
+
+.comment.author-comment p{
+    background-color:  #e2f8ff;
+    order: 1;
+}
+
+.user-comment p:after{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid #f3f3f3;
+    left: -8px;
+    top: 18px;
+}
+
+.author-comment p:after{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid #e2f8ff;
+    right: -8px;
+    top: 18px;
+}
+
+
+
+
+/* Comment form */
+
+.write-new{
+    margin: 80px auto 0;
+    width: 50%;
+}
+
+.write-new input{
+    color:  #444;
+    font: inherit;
+
+    outline: 0;
+    border-radius: 3px;
+    border: 1px solid #cecece;
+    background-color:  #fefefe;
+    box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.06);
+    overflow: auto;
+
+    width:100%;
+    min-height: 80px;
+    padding: 15px 20px;
+}
+
+.write-new img{
+    border-radius: 50%;
+    margin-top: 15px;
+}
+
+.write-new button{
+    float:right;
+    background-color:  #87bae1;
+    box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    border: 0;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+
+    padding: 10px 25px;
+    margin-top: 18px;
+}
+
+
+
+/* Responsive styles */
+
+@media (max-width: 800px){
+    /* Make the paragraph in the comments take up the whole width,
+    forcing the avatar and user info to wrap to the next line*/
+    .comment p{
+        width: 100%;
+    }
+
+    /* Reverse the order of elements in the user comments,
+    so that the avatar and info appear after the text. */
+    .comment.user-comment .info{
+        order: 3;
+        text-align: left;
+    }
+
+    .comment.user-comment .avatar{
+        order: 2;
+    }
+
+    .comment.user-comment p{
+        order: 1;
+    }
+
+
+    /* Align toward the beginning of the container (to the left)
+    all the elements inside the author comments. */
+    .comment.author-comment{
+        justify-content: flex-start;
+    }
+
+
+    .comment-section{
+        margin-top: 10px;
+    }
+
+    .comment .info{
+        width: auto;
+    }
+
+    .comment .info a{
+        padding-top: 15px;
+    }
+
+    .comment.user-comment .avatar,
+    .comment.author-comment .avatar{
+        padding: 15px 10px 0 18px;
+        width: auto;
+    }
+
+    .comment.user-comment p:after,
+    .comment.author-comment p:after{
+        width: 12px;
+        height: 12px;
+        top: initial;
+        left: 28px;
+        bottom: -6px;
+    }
+
+    .write-new{
+        width: 100%;
+    }
+}
+
+
+
+/* ------- Demo footer. Please ignore and remove ------- */
+
+
+
+</style>
+{% endblock %}
+{% block background %}
+<div class="page-info-section set-bg" data-setbg="{% static 'website/website/img/page-bg/2.jpg' %}">
+	<div class="container">
+		<div class="site-breadcrumb">
+			<a href="{% url 'web:website' %}">Home</a>
+			<a href="{% url 'web:course' %}">Courses</a>
+			<span>Detail Course</span>
+		</div>
+	</div>
+</div>
+{% endblock %}
+	<!-- Header section end -->
+
+
+	<!-- Page info -->
+	
+	<!-- Page info end -->
+
+{% block main %}
+
+	<!-- search section -->
+
+	<!-- search section end -->
+
+	{% if m == False %}
+	
+	
+
+	
+	<!-- single course section -->
+	<section class="single-course spad pb-0">
+		{% for detail in detail %}
+		<div class="container">
+			<div class="course-meta-area">
+				<div class="row">
+					<div class="col-lg-10 offset-lg-1">
+						
+						<div class="course-note">Featured Course</div>
+						<h3>{{detail.title}}</h3>
+						<div class="course-metas">
+							<div class="course-meta">
+								<div class="course-author">
+									<div class="ca-pic set-bg" data-setbg="img/authors/2.jpg"></div>
+									<h6>Teacher</h6>
+									<p>William Parker, <span>{{detail.user}}</span></p>
+								</div>
+							</div>
+							<div class="course-meta">
+								<div class="cm-info">
+									<h6>Category</h6>
+									<p>{{detail.catagorey}}</p>
+								</div>
+							</div>
+							<div class="course-meta">
+								<div class="cm-info">
+									<h6>Students</h6>
+									<p>120 Registered Students</p>
+								</div>
+							</div>
+							<div class="course-meta">
+								<div class="cm-info">
+									<h6>Reviews</h6>
+									<p>2 Reviews <span class="rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star is-fade"></i>
+									</span></p>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="site-btn price-btn">Price: $15</a>
+						<a href="#" class="site-btn buy-btn">Buy This Course</a>
+					</div>
+				</div>
+			</div>
+			<div style="width: 100%;"><video style="width: 100%;" class="" controls>
+			<source src="{{detail.video.url}}" type="video/mp4">
+			
+			
+			</video></div>
+			
+			
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1 course-list">
+					<div class="cl-item">
+						<h4>Course Description</h4>
+						<p>{{detail.about | safe}}</p>
+					</div>
+					<div class="cl-item">
+						<h4>Grammer</h4>
+						<p>{{detail.grammer | safe}}</p>
+					</div>
+					<div class="cl-item">
+						<h4>The Instructor</h4>
+						<p>Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna. Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" value="{{detail.id}}" id="id">
+		{% endfor %}
+	</section>
+	{% else %}
+
+<h1>Youe Dont Aceess The Pages and blockef with admin</h1>
+
+
+	{% endif %}
+	<!-- single course section end -->
+	
+
+	<!-- Page -->
+	
+	<!-- Page end -->
+
+
+	<!-- banner section -->
+	<!-- <section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Join Our Community Now!</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="#" class="site-btn">Register Now</a>
+			</div>
+		</div>
+	</section> -->
+	<!-- banner section end -->
+
+
+
+	<ul class="comment-section" id="parent">
+		<div id="tb">
+		{% for j in comment %}
+		<li class="comment user-comment">
+
+			<div class="info">
+				<a href="#">{{j.user}}</a>
+				<span>4 hours ago</span>
+			</div>
+
+			<a class="avatar" href="#">
+				<img src="{{j.user.Image.url}}" width="35" alt="Profile Avatar" title="Anie Silverston" />
+			</a>
+
+			<p>{{j.comment}}</p>
+			{% if user.is_superuser %}
+			<form action="{% url 'web:delete_comment' j.id %}" method="POST">
+				<input type="submit" class="delete_btn" value="delete" data-id="{{j.id}}"> 
+				{% csrf_token %}
+			</form>
+			{% endif %}
+		</li>
+		<input type="hidden" id="hidden" value="{{j.Course.id}}">
+		{% endfor %}
+	</div>
+
+		<li class="write-new">
+
+			<form action="" method="POST">
+
+				<input placeholder="Write your comment here" name="comment" id="comment"></input>
+
+				<div>
+					<img src="{{user.Image.url}}" width="35" alt="Profile of Bradley Jones" title="Bradley Jones" />
+					<button type="submit" id="comt">Sent</button>
+				</div>
+				{% csrf_token %}
+			</form>
+
+		</li>
+
+	</ul>
+
+{% endblock %}
+
+{% block script %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+
+const comt = document.getElementById('comt')
+let id = document.getElementById('id').value
+comt.addEventListener('click',function(e){
+	e.preventDefault()
+	let fd = new FormData()
+	fd.append("comment",document.getElementById('comment').value)
+	fd.append('csrfmiddlewaretoken','{{csrf_token}}');
+	axios.post(`/detail_course/${id}/`,fd)
+	.then(res => {
+		
+		let comment = document.getElementById('comment').value
+		document.getElementById('comment').value = ""
+		const parent = document.getElementById('tb');
+		parent.innerHTML += `
+		
+		<li class="comment user-comment">
+
+			<div class="info">
+			<a href="#">${res.data.use}</a>
+			<span>4 hours ago</span>
+			</div>
+
+			<a class="avatar" href="#">
+			<img src="${res.data.img}" width="35" alt="Profile Avatar" title="Anie Silverston" />
+			</a>
+
+			<p>${comment}</p>
+			<form action="'delete_comment/${res.data.ids}/'" method="POST">
+				<input type="submit" class="delete_btn" value="delete" data-id="{{j.id"> 
+				{% csrf_token %}
+			</form>
+		</li>
+		
+		
+		`
+		
+	})
+	.catch(err => {
+		console.log(err)
+	})
+})
+
+</script>
+
+
+<script>
+	let delete_btn = document.getElementsByClassName('delete_btn')
+	for(btn of delete_btn){
+		btn.addEventListener('click',function(e){
+			e.preventDefault()
+			let id = btn.getAttribute('data-id')
+			let fd = new FormData()
+			fd.append('id',id);
+			fd.append('csrfmiddlewaretoken','{{csrf_token}}');
+			axios.post(`/delete_comment/${id}/`,fd)
+			.then(res => {
+				this.closest('li').remove()
+			})
+			.catch(err => {
+				console.log(err)
+			})
+		})
+	}
+</script>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+	.site-btn {
+		min-width: 92px;
+		font-size: 15px;
+		font-weight: 500;
+	}
+	.form-control {
+		width: 33%;
+		height: calc(3.25rem + 2px);
+	}
+	.intro-newslatter .site-btn {
+		margin: 2% 0;
+	}
+	
+	.p1{
+		height: 70px;
+	}
+	.course-item .course-info{
+		height: 49vh;
+	}
+	
+
+</style>
+{% endblock %}
+
+{% block background %}
+
+	<!-- Page info -->
+	<div class="page-info-section set-bg" data-setbg="{% static 'website/website/img/page-bg/1.jpg' %}">
+		<div class="container">
+			<div class="site-breadcrumb">
+				<a href="{% url 'web:website' %}">Home</a>
+				<span>Courses</span>
+			</div>
+		</div>
+	</div>
+	<!-- Page info end -->
+{% endblock %}
+
+	<!-- search section -->
+	{% block main %}
+	
+	<!-- search section end -->
+
+
+	<!-- course section -->
+	<section class="course-section spad pb-0">
+		<div class="course-warp">
+			                                      
+			<div class="row course-items-area">
+				<!-- course -->
+				{% for j in course %}
+				<div class="mix col-lg-3 col-md-4 col-sm-6 photo curs">
+					<div class="course-item">
+						<a href="{% url 'web:detail_course' j.id %}">
+						<div class="course-thumb set-bg" data-setbg="{{j.image.url}}">
+							
+							<div class="price">Price: Free</div>
+						
+						</div>
+					</a>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>{{j.title}}</h5>
+								<p class="p1">{{ j.grammer|slice:":60" | safe  }}</p>
+								{% for i in customer %}
+								{% if i.Course.id == j.id %}
+								<div class="students"></div>
+								{% endif %}
+								{% endfor %}
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{j.user.Image.url}}"></div>
+								<p>William Parker, <span>{{j.user}}</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				<!-- course -->
+				
+				<!-- course -->
+				
+			<div class="featured-courses">
+				<!-- <div class="featured-course course-item">
+					<div class="course-thumb set-bg" data-setbg="img/courses/f-1.jpg">
+						<div class="price">Price: $15</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 offset-lg-6 pl-0">
+							<div class="course-info">
+								<div class="course-text">
+									<div class="fet-note">Featured Course</div>
+									<h5>HTNL5 & CSS For Begginers</h5>
+									<p>Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna</p>
+									<div class="students">120 Students</div>
+								</div>
+								<div class="course-author">
+									<div class="ca-pic set-bg" data-setbg="img/authors/1.jpg"></div>
+									<p>William Parker, <span>Developer</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<!-- <div class="featured-course course-item">
+					<div class="course-thumb set-bg" data-setbg="img/courses/f-2.jpg">
+						<div class="price">Price: $15</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 pr-0">
+							<div class="course-info">
+								<div class="course-text">
+									<div class="fet-note">Featured Course</div>
+									<h5>HTNL5 & CSS For Begginers</h5>
+									<p>Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna</p>
+									<div class="students">120 Students</div>
+								</div>
+								<div class="course-author">
+									<div class="ca-pic set-bg" data-setbg="img/authors/2.jpg"></div>
+									<p>William Parker, <span>Developer</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</section>
+	<!-- course section end -->
+
+
+	<!-- banner section -->
+	<section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Join Our Community Now!</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="#" class="site-btn">Register Now</a>
+			</div>
+		</div>
+	</section>
+	<!-- banner section end -->
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+    $(document).ready(function() {
+      $('.col-lg-4.col-md-6').each(function() {
+        var spanCount = $(this).find('span').length; // شمارش تعداد تگ‌های <span> درون هر تگ <div>
+        $(this).find('.mm').first().append('<span>' + spanCount + ' Course</span>'); // اضافه کردن متن شمارش به تگ <span> اول درون تگ <div>
+      });
+    });
+  </script>
+
+
+
+<script>
+    $(document).ready(function() {
+      $('.curs').each(function() {
+        var spanCount = $(this).find('.students').length; // شمارش تعداد تگ‌های <span> درون هر تگ <div>
+        $(this).find('.students').first().append('<span>' + spanCount + ' Students</span>'); // اضافه کردن متن شمارش به تگ <span> اول درون تگ <div>
+      });
+    });
+  </script>
+{% endblock %}

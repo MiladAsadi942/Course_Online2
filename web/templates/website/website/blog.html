@@ -1,0 +1,120 @@
+
+{% extends 'website/base.html' %}
+{% load static %}
+{% block background %}
+<div class="page-info-section set-bg" data-setbg="{% static 'website/website/img/page-bg/3.jpg' %}">
+	<div class="container">
+		<div class="site-breadcrumb">
+			<a href="#">Home</a>
+			<span>Blog</span>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+	<!-- Header section end -->
+
+
+	<!-- Page info -->
+	
+	<!-- Page info end -->
+
+
+	<!-- search section -->
+	
+
+	<!-- Page  -->
+	{% block main %}
+	<section class="blog-page spad pb-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9">
+					<!-- blog post -->
+					<div class="blog-post">
+						<img src="{% static 'website/website/img/blog/1.jpg' %}" alt="">
+						<h3>{{detail_about.Title}}</h3>
+						<div class="blog-metas">
+							<div class="blog-meta author">
+								<div class="post-author set-bg" data-setbg="img/authors/1.jpg"></div>
+								<a href="#"></a>
+							</div>
+							<div class="blog-meta">
+								<a href="#">Development</a>
+							</div>
+							<div class="blog-meta">
+								<a href="#">{{detail_about.date}}</a>
+							</div>
+							<div class="blog-meta">
+								<a href="#">2 Comments</a>
+							</div>
+						</div>
+						<p>{{detail_about.bio}}</p>
+						<a href="#" class="site-btn readmore">Read More</a>
+					</div>
+					<!-- blog post -->
+				
+					<!-- blog post -->
+					
+					<div class="site-pagination">
+						<span class="active">01.</span>
+						<a href="#">02.</a>
+						<a href="#">03</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-5 col-sm-9 sidebar">
+					<div class="sb-widget-item">
+						<form class="search-widget">
+							<input type="text" placeholder="Search">
+							<button><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+					<div class="sb-widget-item">
+						<h4 class="sb-w-title">Categories</h4>
+						<ul>
+							<li><a href="#">Developement</a></li>
+							<li><a href="#">Social Media</a></li>
+							<li><a href="#">Press</a></li>
+							<li><a href="#">Events & Lifestyle</a></li>
+							<li><a href="#">Uncategorizes</a></li>
+						</ul>
+					</div>
+					
+					<div class="sb-widget-item">
+						<h4 class="sb-w-title">Archives</h4>
+						<div class="tags">
+							{% for j in catagorey %}
+							<a href="/detail_Catagorey/{{j.id}}/">{{j.name}}</a>
+							
+							{% endfor %}
+						</div>
+					</div>
+					<div class="sb-widget-item">
+						<div class="add">
+							<a href="#"><img src="img/add.jpg" alt=""></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page end -->
+
+
+	<!-- banner section -->
+	{% if not user.is_authenticated %}
+	<section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Join Our Community Now!</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="{% url 'accounts:register' %}" class="site-btn">Register Now</a>
+			</div>
+		</div>
+	</section>
+	{% endif %}
+
+{% endblock %}
+	
+	
